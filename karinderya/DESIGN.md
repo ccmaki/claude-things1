@@ -58,6 +58,27 @@ Each cooked dish = 10 orders (20 half-scoops) in its kaldero.
 - **Plates:** 6 clean plates. Walk out, tap a dirty plate to pick up every plate
   on that table (carry up to 6), tap the sink to wash. No clean plates = no service.
 - Movement: tap to walk, A* pathfinding around tables and the counter.
+- **Kalan (stove, kitchen right):** when a kaldero runs low (shows "!"), walk
+  to the kalan and cook 5 more orders for half the puhunan. It is a one-step
+  quick mini-game while customers keep waiting. Stars average with the morning batch.
+
+## Upgrades (evening → MGA UPGRADE)
+
+| Upgrade                 | Effect per level                    | Costs           |
+|-------------------------|-------------------------------------|-----------------|
+| Dagdag na plato         | +2 clean plates (6 → 12)            | ₱300, 500, 800  |
+| Mas malaking bandehado  | +2 carry (6 → 10)                   | ₱250, 500       |
+| Bagong electric fan     | +25% customer patience              | ₱400, 800       |
+| Bagong tsinelas         | +20% walking speed                  | ₱300, 600       |
+| Dagdag na kaldero       | +1 dish per day (3 → 5)             | ₱800, 1500      |
+| Si Nene, ang bunso      | sister collects and washes plates; level 2 is faster and carries more (from Day 3) | ₱1200, 900 |
+
+## Save
+
+Progress saves automatically in the browser (localStorage): at each morning,
+after each dish is cooked, at the end of each day, and on every upgrade.
+The title screen shows **ITULOY · ARAW N** and a **BAGONG LARO** button
+(tap twice to confirm).
 
 ## Suki
 
@@ -69,11 +90,25 @@ when served correctly.
 
 ## Roadmap / ideas
 
-- **Helpers & upgrades:** unlock the apo's sister to collect and wash plates;
-  bigger carry stack; more kaldero slots; more plates; faster rice cooker.
-- **Mid-rush re-cook** ("Magluto pa") when a kaldero runs low.
+- More helpers (e.g. a cousin who plates simple orders), faster rice cooker.
 - **More recipes:** kare-kare, bistek, pinakbet, lumpia, dinuguan.
 - **Suki quirks:** "Yung toasted part ha!", utang ("lista mo muna"), regular schedules.
 - **Events:** brownout, rainy day (sopas/lugaw sell more), fiesta, payday (15th/30th).
-- **Save progress** between sessions.
 - **Sound & music.**
+
+## Code layout
+
+No build step. `index.html` loads plain scripts in order; they share globals.
+
+| File               | Contents                                              |
+|--------------------|-------------------------------------------------------|
+| `js/draw.js`       | constants, palette, helpers, sound, people/food/buttons |
+| `js/data.js`       | recipes, upgrades, game state, save/load              |
+| `js/minigames.js`  | chop, flip, pour, stir, mash                          |
+| `js/scenes.js`     | title, morning notebook, cooking                      |
+| `js/rush.js`       | lunch rush: orders, plating, plates, pathfinding, Nene, kalan |
+| `js/screens.js`    | evening tally, upgrade shop                           |
+| `js/main.js`       | canvas sizing, input, main loop                       |
+
+`artifact.html` is the same page without the document wrapper, used to publish
+the playable link. `window.KD` exposes game state for automated tests.

@@ -1,0 +1,18 @@
+<title>Karinderya ni Lola Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Caveat:wght@600&family=Figtree:wght@400;600;800&display=swap">
+<style>
+/* Full-screen canvas game. Single committed look (warm wood), so colors are fixed rather than themed. */
+:root{--wood:#2b1d16;color-scheme:dark}
+html{height:100%;box-sizing:border-box}
+body{height:100%;margin:0;background:var(--wood);overflow:hidden;overscroll-behavior:none}
+#game{display:block;width:100%;height:100%;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;outline:none}
+</style>
+<canvas id="game" aria-label="Karinderya ni Lola: a cooking and serving game"></canvas>
+<script src="js/draw.js"></script>
+<script src="js/data.js"></script>
+<script src="js/minigames.js"></script>
+<script src="js/scenes.js"></script>
+<script src="js/rush.js"></script>
+<script src="js/screens.js"></script>
+<script src="js/main.js"></script>
